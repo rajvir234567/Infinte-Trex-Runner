@@ -1,5 +1,6 @@
 var PLAY = 1;
 var END = 0;
+var WIN = 2;
 var gameState = PLAY;
 
 var trex, trex_running, trex_collided;
@@ -113,8 +114,26 @@ function draw() {
         gameState = END;
         dieSound.play();
     }
+    if(score === 10000){
+      gameState = WIN;
+    }
   }
-   else if (gameState === END) {
+  if(gameState === WIN){
+      
+    textSize(30); 
+    text("YOU WIN",width/2,height/2);
+    
+    ground.velocityX = 0;
+    trex.velocityY = 0;
+    
+    obstaclesGroup.setLifetimeEach(-1);
+    cloudsGroup.setLifetimeEach(-1);
+    
+    obstaclesGroup.setVelocityXEach(0);
+    cloudsGroup.setVelocityXEach(0); 
+  }
+
+    if (gameState === END) {
       gameOver.visible = true;
       restart.visible = true;
      
