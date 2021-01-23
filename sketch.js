@@ -8,10 +8,8 @@ var ground, invisibleGround, groundImage;
 var cloudsGroup, cloudImage;
 var obstaclesGroup, obstacle1, obstacle2, obstacle3, obstacle4, obstacle5, obstacle6;
 
-var camera = 0;
-
 var score;
-var gameOverImg,restartImg;
+var gameOverImg, restartImg;
 var jumpSound , checkPointSound, dieSound;
 
 function preload(){
@@ -44,7 +42,6 @@ function setup() {
   trex.addAnimation("running", trex_running);
   trex.addAnimation("collided", trex_collided);
   
-
   trex.scale = 0.5;
   
   ground = createSprite(200,180,400,20);
@@ -86,8 +83,6 @@ function draw() {
     ground.velocityX = -(4 + 3* score/100)
     //scoring
     score = score + Math.round(getFrameRate()/60);
-    
-    camera.positionX = camera + 10;
 
     if(score>0 && score%100 === 0){
        checkPointSound.play();
@@ -161,7 +156,7 @@ function reset(){
 
 
 function spawnObstacles(){
- if (camera % 60 === 0){
+ if (frameCount % 60 === 0){
    var obstacle = createSprite(600,165,10,40);
    obstacle.velocityX = -(6 + score/100);
    
@@ -194,7 +189,7 @@ function spawnObstacles(){
 
 function spawnClouds() {
   //write code here to spawn the clouds
-  if (camera % 60 === 0) {
+  if (frameCount % 60 === 0) {
     var cloud = createSprite(600,120,40,10);
     cloud.y = Math.round(random(80,120));
     cloud.addImage(cloudImage);
